@@ -6,7 +6,7 @@ def jogar_adivinhacao():
     print("\n ")
 
     #Declaração de variáveis
-    n_secreto = rd.randrange(1,11)
+    n_secreto = rd.randrange(1,11) #range = alcance
     tentativas = 0
     rodada = 1
     pontuacao = 1000

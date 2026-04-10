@@ -1,9 +1,11 @@
-def jogar_forca():
-    
+import random as rd
+
+def  mensagem_inicial():
     print("*******************************")
     print("\nBem vindo ao jogo da forca!\n")
     print("*******************************")
 
+def selec_palavra_aleatoria(): 
     arquivo = open("Jogos/palavras.txt", "r") #R = apenas read (ler) o arquivo
     palavras = []
 
@@ -12,9 +14,32 @@ def jogar_forca():
         palavras.append(linha)
                                                          
     arquivo.close()
+    posicao = rd.randrange(0,len(palavras))
 
-    palavra_secreta = "processador"
-    letras_acertadas = ["_" for letra in palavra_secreta]
+    palavra_secreta = palavras[posicao].lower()
+    return palavra_secreta
+    
+def letras_corretas(palavra_secreta):
+    return ["_" for letra in palavra_secreta]
+
+def entrada_dados():
+    chute = input("\nEscreva uma letra: ")
+    chute = chute.strip().lower() 
+    return chute
+
+def chute_correto(chute, palavra_secreta, letras_acertadas):
+    index = 0
+
+    for letra in palavra_secreta:
+        if (chute == letra):
+            letras_acertadas[index] = letra
+        index += 1
+    return letras_acertadas    
+def jogar_forca():
+    mensagem_inicial()
+
+    palavra_secreta = selec_palavra_aleatoria()
+    letras_acertadas = letras_corretas(palavra_secreta)
 
     # for letra in palavra_secreta:
         #letras_acertadas.append("_")
@@ -23,20 +48,16 @@ def jogar_forca():
     acertou = False
     erros = 0
 
-    #Enquanto não acertar a palavra secreta e não perder, o jogador pode jogar.
     while not perdeu and not acertou:
-        chute = input("\nEscreva uma letra: ")
-        chute = chute.strip().lower() 
+        chute = entrada_dados()
 
-        # Se o chute estiver na palavra, preenchemos as posições corretas
+      
         if (chute in palavra_secreta):
-            index = 0
-            for letra in palavra_secreta:
-                if (chute == letra):
-                    letras_acertadas[index] = letra
-                index += 1
+            chute_correto(chute, palavra_secreta, letras_acertadas)
+        # Se o chute estiver na palavra, preenchemos as posições corretas
+
         else:
-            #Se não estiver, adicionamos APENAS 1 erro nesta rodada
+            #Se não estiver, adicionamos APENAS 1 erro nesta rodada: erros = erros + 1
             erros += 1 
         # Verifica se o jogador perdeu
         perdeu = erros == 6

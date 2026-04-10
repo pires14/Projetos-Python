@@ -1,10 +1,9 @@
-
-Processador
-HD
-SSDD
-Tela
-Mouse
-Teclado
-RAM
-Webcam
-Placa de video
+processador
+hd
+ssd
+tela
+mouse
+teclado
+ram
+webcam
+placadevideo
